@@ -22,9 +22,8 @@ public class UserListPage extends WebPage {
     public UserListPage(final PageParameters parameters) {
         addLinkToNewUserPage();
         addUserList();
-
         add(new FeedbackPanel("feedbackMessage", new ExactErrorLevelFilter(FeedbackMessage.ERROR)));
-        add(new FeedbackPanel("succesMessage", new ExactErrorLevelFilter(FeedbackMessage.SUCCESS)));
+        add(new FeedbackPanel("successMessage", new ExactErrorLevelFilter(FeedbackMessage.SUCCESS)));
     }
 
     private void addLinkToNewUserPage() {
@@ -43,12 +42,18 @@ public class UserListPage extends WebPage {
 
             @Override
             protected void populateItem(ListItem<User> item) {
-                Object user = item.getDefaultModelObject();
+                final User user = (User) item.getDefaultModelObject();
                 item.add(new Label("id", PropertyModel.of(user, "id")));
                 item.add(new Label("firstName", PropertyModel.of(user, "firstName")));
                 item.add(new Label("lastName", PropertyModel.of(user, "lastName")));
                 item.add(new Label("email", PropertyModel.of(user, "email")));
                 item.add(new Label("birthDate", PropertyModel.of(user, "birthDate")));
+                item.add(new Link<Void>("edit") {
+                    @Override
+                    public void onClick() {
+                        setResponsePage(new UserEditPage(user));
+                    }
+                });
             }
         });
     }
