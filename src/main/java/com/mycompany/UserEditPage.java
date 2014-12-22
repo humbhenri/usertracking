@@ -2,6 +2,7 @@ package com.mycompany;
 
 import java.util.Date;
 
+import org.apache.wicket.Session;
 import org.apache.wicket.feedback.FeedbackMessage;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
@@ -30,7 +31,7 @@ public class UserEditPage extends WebPage {
             protected void onSubmit() {
                 super.onSubmit();
                 userDAO.save(user);
-                success("User added");
+                Session.get().getFeedbackMessages().success(null, "User added");
                 setResponsePage(UserListPage.class);
             }
         };
