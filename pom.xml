@@ -92,6 +92,13 @@
     </dependency>
 
     <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>${hibernate-core-version}</version>
+    </dependency>
+
+
+    <dependency>
       <groupId>javassist</groupId>
       <artifactId>javassist</artifactId>
       <version>${javassist.version}</version>
@@ -166,8 +173,8 @@
     </dependency>
 
   </dependencies>
-  
-   
+
+
   <build>
     <resources>
       <resource>

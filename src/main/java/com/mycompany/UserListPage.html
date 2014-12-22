@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
-	<head>
-		<meta charset="utf-8" />
-		<title>Apache Wicket Quickstart</title>
-		<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold' rel='stylesheet' type='text/css' />
-		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Stylesheet" />
-	</head>
-	<body>
-		<a href="" wicket:id="addUser">Add user</a>
-		
-		<table>
-			<tr>
-				<th>Id</th>
-				<th>First name</th>	
-				<th>Last name</th>
-				<th>Email</th>
-				<th>Birthday</th>
-				<th>Edit</th>
-				<th>Delete</th>
-			</tr>
-		</table>
-	</body>
+<head>
+<meta charset="utf-8" />
+<title>Apache Wicket Quickstart</title>
+<link
+	href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="style.css" type="text/css" media="screen"
+	title="Stylesheet" />
+</head>
+<body>
+	<div style="color: green" wicket:id="succesMessage"></div>
+	<div style="color: red" wicket:id="feedbackMessage"></div>
+	<a href="" wicket:id="addUser">Add user</a>
+
+	<table>
+		<tr>
+			<th>Id</th>
+			<th>First name</th>
+			<th>Last name</th>
+			<th>Email</th>
+			<th>Birthday</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
+		<tr wicket:id="userList">
+			<td wicket:id="id">Id</td>
+			<td wicket:id="firstName">First name</td>
+			<td wicket:id="lastName">Last name</td>
+			<td wicket:id="email">Email</td>
+			<td wicket:id="birthDate">Birthday</td>
+			<td><a href="">Edit</a></td>
+			<td><a href="">Delete</a></td>
+		</tr>
+	</table>
+</body>
 </html>
