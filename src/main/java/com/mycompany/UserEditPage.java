@@ -3,8 +3,11 @@ package com.mycompany;
 import java.util.Date;
 
 import org.apache.wicket.Session;
+import org.apache.wicket.ajax.AjaxEventBehavior;
+import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.feedback.FeedbackMessage;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -43,6 +46,14 @@ public class UserEditPage extends WebPage {
                 .lengthBetween(1, User.LAST_NAME_LEN)));
         form.add(new RequiredTextField<String>("user.email").add(EmailAddressValidator.getInstance()));
         form.add(new RequiredTextField<Date>("user.birthDate"));
+        form.add(new Button("cancel").add(new AjaxEventBehavior("onclick") {
+
+            @Override
+            protected void onEvent(AjaxRequestTarget target) {
+                setResponsePage(UserListPage.class);
+            }
+
+        }));
 
         add(new FeedbackPanel("feedbackMessage", new ExactErrorLevelFilter(FeedbackMessage.ERROR)));
         add(new FeedbackPanel("succesMessage", new ExactErrorLevelFilter(FeedbackMessage.SUCCESS)));
