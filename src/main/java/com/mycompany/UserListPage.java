@@ -1,5 +1,9 @@
 package com.mycompany;
 
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.attributes.AjaxCallListener;
+import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
+import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.feedback.FeedbackMessage;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
@@ -54,8 +58,25 @@ public class UserListPage extends WebPage {
                         setResponsePage(new UserEditPage(user));
                     }
                 });
+                item.add(new AjaxFallbackLink<Void>("delete") {
+                    @Override
+                    protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
+                        super.updateAjaxAttributes(attributes);
+                        AjaxCallListener ajaxCallListener = new AjaxCallListener();
+                        String text = "Confirm deletion ?";
+                        ajaxCallListener.onPrecondition("return confirm('" + text + "');");
+                        attributes.getAjaxCallListeners().add(ajaxCallListener);
+                    }
+
+                    @Override
+                    public void onClick(AjaxRequestTarget target) {
+                        userDAO.delete(user);
+                        getSession().success("User deleted");
+                        setResponsePage(UserListPage.class);
+                    }
+                });
             }
-        });
+        }.setOutputMarkupId(true));
     }
 
 }

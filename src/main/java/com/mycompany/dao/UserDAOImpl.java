@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,13 @@ public class UserDAOImpl implements UserDAO {
     public List<User> findAll() {
         List<User> users = em.createQuery("from User").getResultList();
         return users;
+    }
+
+    @Override
+    public void delete(User user) {
+        Query q = em.createQuery("delete from User where id = :id");
+        q.setParameter("id", user.getId());
+        q.executeUpdate();
     }
 
 }
